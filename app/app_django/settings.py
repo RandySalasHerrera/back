@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django-keycloak-auth.middleware.KeycloakMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'app_django.urls'
@@ -123,7 +125,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.AllowAny',
 
     ),
@@ -182,3 +184,11 @@ BROKER_URL = 'amqp://{broker_usr}:{broker_pwd}@{broker_host}:{broker_port}{broke
 #Redis configurations
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+
+KEYCLOAK_EXEMPT_URIS = []
+KEYCLOAK_CONFIG = {
+    'KEYCLOAK_SERVER_URL': 'https://auth.colombiaevaluadora.edu.co/auth',
+    'KEYCLOAK_REALM': 'solinces',
+    'KEYCLOAK_CLIENT_ID': 'ms-establecimiento',
+    'KEYCLOAK_CLIENT_SECRET_KEY': 'UCIn5J2yXlF8SxuTkzTnBFHGRLOgoFZJ'
+}

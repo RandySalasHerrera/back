@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.views.generic import RedirectView
 from base.api import views
 from rest_framework_simplejwt.views import (
@@ -40,7 +40,7 @@ schema_view = get_schema_view(
 )
 
 class Protegida(APIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     
     def get(self, request):
         return Response({"content": "Esta vista está protegida"})
@@ -54,4 +54,6 @@ urlpatterns = [
 
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    
+    path("", include("users.api.urls")),
 ]
