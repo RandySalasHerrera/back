@@ -4,16 +4,25 @@ from users import models as users_models
 from users.api import serializers
 from users import exceptions
 
+#from keycloak import KeycloakOpenID
+
 class UserAPIView(generics.ListAPIView):
 
-    keycloak_roles = {
-        'GET': ['Admin'],
-    }
+    # keycloak_roles = {
+    #     'GET': ['Admin'],
+    # }
+
+    # Configure client
+
 
     serializer_class = serializers.UserSerializer
     
-    def get_queryset(self):
-        return users_models.User.objects.all()
+    # def get_queryset(self):
+    #     return users_models.User.objects.all()
+
+    def get(self, request, format=None):
+
+        return Response(data={'status': '201', 'message': 'lista de usuario'})
 
 
     def post(self, request, format=None):
