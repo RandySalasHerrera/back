@@ -27,8 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
+ALLOWED_HOSTS=["*"]
 
 # Application definition
 
@@ -45,12 +44,11 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'users',
-    'base',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
-    'django-keycloak-auth.middleware.KeycloakMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,8 +56,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:4002',
+)
 
 ROOT_URLCONF = 'app_django.urls'
 
@@ -181,14 +184,3 @@ BROKER_URL = 'amqp://{broker_usr}:{broker_pwd}@{broker_host}:{broker_port}{broke
     broker_vhost='/',
 )
 
-#Redis configurations
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
-
-KEYCLOAK_EXEMPT_URIS = []
-KEYCLOAK_CONFIG = {
-    'KEYCLOAK_SERVER_URL': 'https://auth.colombiaevaluadora.edu.co/auth',
-    'KEYCLOAK_REALM': 'solinces',
-    'KEYCLOAK_CLIENT_ID': 'ms-establecimiento',
-    'KEYCLOAK_CLIENT_SECRET_KEY': 'UCIn5J2yXlF8SxuTkzTnBFHGRLOgoFZJ'
-}

@@ -1,13 +1,14 @@
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from users import models as base_models
+from users import models as users_models
 
 
 class UserSerializer(serializers.ModelSerializer):
 
-    id = serializers.IntegerField()
-    name = serializers.CharField()
+    nombre = serializers.CharField()
+    apellido = serializers.CharField()
+    documento = serializers.CharField()
+    fecha = serializers.DateField()
 
     class Meta:
-        model = base_models.User
-        fields = ("id", "name")
+        model = users_models.Usuario
+        fields = ("nombre", "apellido", "documento", "fecha")

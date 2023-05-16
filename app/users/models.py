@@ -1,14 +1,15 @@
 from django.db import models
 
-class User(models.Model):
-    pk_tjornada = models.IntegerField(),
-    codigo = models.CharField(max_length=100),
-    author_rc = models.CharField(max_length=100),
-    clients_rc = models.CharField(max_length=100)
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    documento = models.CharField(max_length=100)
+    fecha = models.DateField(verbose_name="Fecha de nacimiento", blank=True, null=True)
     # Agrega más campos según tus necesidades
     
+    def __str__(self):
+        return self.nombre
+
     class Meta:
-        # db_table = "TJORNADA" # nombre de la tabla en la base de datos
-        db_table = "ACADEMICO_TESTV0.TJORNADA"
-        managed = False
-        # db_schema = 'ACADEMICO_TESTV0'
+        verbose_name = "Usuario"
+        verbose_name_plural = "Usuarios"

@@ -22,20 +22,18 @@ services:
       - POSTGRES_USER=hello_django
       - POSTGRES_PASSWORD=hello_django
       - POSTGRES_DB=hello_django_dev
-  
-  celery:
-    build: ./app
-    command: celery worker --app=app_django --loglevel=info
-    volumes:
-      - ./app:/usr/src/app
-    env_file:
-      - ./.env.dev
-    depends_on:
-      - web
-      - redis
 
-  redis:
-    image: redis:6-alpine
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+#      PGADMIN_DEFAULT_PASSWORD: "admin"
+#    ports:
+#      - "4007:80"
+#    depends_on:
+#        - db
+
+
   
 
 volumes:

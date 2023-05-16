@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
-from base.api import views
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
@@ -48,7 +47,6 @@ class Protegida(APIView):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", RedirectView.as_view(url="admin/")),
-    path('api/token/', views.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('protegida/', Protegida.as_view(), name='protegida'),
 

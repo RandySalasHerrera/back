@@ -11,4 +11,8 @@ celery==4.4.7
 
 redis==3.5.3
 amqp==2.6.
-django-keycloak-auth
+django-cors-headers
+
+pykml
+pyshp
+gpd
